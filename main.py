@@ -18,10 +18,10 @@ try:
     element = WebDriverWait(driver, 5).until(
         EC.presence_of_element_located(('id', 'canvas')))
 except common.exceptions.NoSuchElementException:
-    print('Элемент не найден')
+    print('Element not found')
 except common.exceptions.TimeoutException:
-    print('3D объект не найден')
+    print('3D object not found')
 else:
-    print('Все хорошо')
+    print('Test passed')
 finally:
    driver.quit()
