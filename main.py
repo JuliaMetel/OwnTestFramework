@@ -1,16 +1,27 @@
-# This is a sample Python script.
+from selenium import webdriver, common
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Немного настроим наш браузер
+driver = webdriver.Chrome(service=Service('/Users/yuliametel/PycharmProjects/OwnTestFramework/venv/lib/python3.9'
+                                          '/site-packages/seleniumbase/drivers/chromedriver'),
+                          options=webdriver.ChromeOptions())
+driver.maximize_window()
+driver.implicitly_wait(3)
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Откроем страницу
+driver.get("https://webglsamples.org/collectibles/index.html")
+try:
+    elem = driver.find_element('id', 'dollbaseFemale')
+    elem.click()
+    element = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located(('id', 'canvas')))
+except common.exceptions.NoSuchElementException:
+    print('Элемент не найден')
+except common.exceptions.TimeoutException:
+    print('3D объект не найден')
+else:
+    print('Все хорошо')
+finally:
+   driver.quit()
