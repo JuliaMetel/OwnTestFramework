@@ -4,9 +4,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Browser settings
-driver = webdriver.Chrome(service=Service('/Users/yuliametel/PycharmProjects/OwnTestFramework/venv/lib/python3.9'
-                                          '/site-packages/seleniumbase/drivers/chromedriver'),
-                          options=webdriver.ChromeOptions())
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--auto-open-devtools-for-tabs')
+driver = webdriver.Chrome(options=chrome_options)
 driver.maximize_window()
 driver.implicitly_wait(3)
 
