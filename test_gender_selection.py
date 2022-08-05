@@ -13,6 +13,20 @@ def is_images_equal(img1, img2):
         return True
     return False
 
+
+def wait_page_stable(test_path, path, driver):
+    test_path = test_path
+    driver.save_screenshot(test_path)
+    for x in range(10):
+        time.sleep(0.1)
+        path = path
+        driver.save_screenshot(path)
+        if is_images_equal(test_path, path):
+            break
+        driver.save_screenshot(test_path)
+    os.remove(test_path)
+
+
 @pytest.fixture
 def driver():
     # Browser settings
@@ -31,28 +45,9 @@ class TestClass:
     def test_gender_selection_female(self, driver):
         driver.get("https://webglsamples.org/collectibles/index.html")
         driver.find_element('id', 'dollbaseFemale').click()
-        test_path = 'test_gender_selection_female_test.png'
-        driver.save_screenshot(test_path)
-        for x in range(10):
-            time.sleep(0.1)
-            path = 'test_gender_selection_female.png'
-            driver.save_screenshot(path)
-            if is_images_equal(test_path, path):
-                break
-            driver.save_screenshot(test_path)
-        os.remove(test_path)
+        wait_page_stable('test_gender_selection_female_test.png', 'test_gender_selection_female.png', driver)
 
     def test_gender_selection_male(self, driver):
         driver.get("https://webglsamples.org/collectibles/index.html")
         driver.find_element('id', 'dollbaseMale').click()
-        test_path = 'test_gender_selection_male_test.png'
-        driver.save_screenshot(test_path)
-        for x in range(10):
-            time.sleep(0.1)
-            path = 'test_gender_selection_male.png'
-            driver.save_screenshot(path)
-            if is_images_equal(test_path, path):
-                break
-            driver.save_screenshot(test_path)
-        os.remove(test_path)
-
+        wait_page_stable('test_gender_selection_male_test.png', 'test_gender_selection_male.png', driver)
