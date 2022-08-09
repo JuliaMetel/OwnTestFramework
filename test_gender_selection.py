@@ -1,9 +1,6 @@
 import time
 import io
-import pytest
 from PIL import Image, ImageChops
-from selenium import webdriver
-
 
 def is_images_equal(img1, img2):
     image_1 = Image.open(io.BytesIO(img1)).convert('RGB')
@@ -22,20 +19,6 @@ def wait_page_stable(driver):
             break
         time.sleep(0.01)
         image_1 = driver.get_screenshot_as_png()
-
-
-@pytest.fixture
-def driver(request):
-    # Browser settings
-    chrome_options = webdriver.ChromeOptions()
-
-    with webdriver.Chrome(options=chrome_options) as driver:
-        driver.maximize_window()
-        driver.implicitly_wait(10)
-
-        yield driver
-
-        driver.save_screenshot(request.node.name + '.png')
 
 
 # Test run
