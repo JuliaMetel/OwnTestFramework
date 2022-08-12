@@ -3,7 +3,7 @@ from selenium import webdriver
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_run_test_make_report(item):
+def pytest_runtest_makereport(item):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
@@ -20,5 +20,5 @@ def driver(request):
 
         yield driver
 
-        if request.node.rep_call.failed:
+        if hasattr(request.node, 'rep_call') and request.node.rep_call.failed:
             driver.save_screenshot(request.node.name + '.png')
