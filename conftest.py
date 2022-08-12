@@ -1,6 +1,14 @@
 import pytest
 from selenium import webdriver
 
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+
+
 @pytest.fixture
 def driver(request):
     # Browser settings
@@ -12,4 +20,5 @@ def driver(request):
 
         yield driver
 
-        driver.save_screenshot(request.node.name + '.png')
+        if hasattr(request.node, 'rep_call') and request.node.rep_call.failed:
+            driver.save_screenshot(request.node.name + '.png')
