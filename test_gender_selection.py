@@ -5,15 +5,15 @@ from page_two import PageTwo
 class TestClass:
 
     def test_gender_selection_female(self, driver):
-        page_one = PageOne()
-        page_one.open_page(driver, page_one.link)
-        page_one.element_doll_base_female(driver).click_element()
-        page_two = PageTwo()
-        page_two.wait_page_stable(driver)
+        page_one = PageOne(driver)
+        page_one.open_page()
+        page_one.element_doll_base_female().click_element()
+        page_two = PageTwo(driver)
+        page_two.wait_page_stable()
 
     def test_gender_selection_male(self, driver):
-        page_one = PageOne()
-        page_one.open_page(driver, page_one.link)
-        page_one.element_doll_base_male(driver).click_element()
-        page_two = PageTwo()
-        page_two.wait_page_stable(driver)
+        page_one = PageOne(driver)
+        page_one.open_page()
+        page_one.element_doll_base_male().click_element()
+        page_two = PageTwo(driver)
+        page_two.wait_page_stable()
