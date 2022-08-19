@@ -4,3 +4,6 @@ class FoundationElement():
 
     def click_element(self):
         self.__element.click()
+
+    def get_text(self):
+        return self.__element.text

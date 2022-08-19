@@ -1,5 +1,6 @@
 import io
 from PIL import Image, ImageChops
+from exception import TextIsDifferent
 
 
 def is_images_equal(img1, img2):
@@ -9,3 +10,8 @@ def is_images_equal(img1, img2):
     if result is None:
         return True
     return False
+def check_text_equality(text1,text2):
+    if text1 == text2:
+        return True
+    else:
+        raise TextIsDifferent('The text on the page is different than expected')
