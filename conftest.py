@@ -2,7 +2,6 @@ import pytest
 from selenium import webdriver
 
 
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item):
     outcome = yield
