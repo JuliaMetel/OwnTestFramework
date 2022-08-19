@@ -2,6 +2,7 @@ from utils import check_text_equal
 from page_one import PageOne
 from page_two import PageTwo
 
+
 # Test run
 class TestClass:
 

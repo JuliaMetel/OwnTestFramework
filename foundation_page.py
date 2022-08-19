@@ -2,6 +2,7 @@ import time
 from utils import is_images_equal
 from exception import PageWithoutLinkException
 
+
 class FoundationPage():
 
     def __init__(self, driver):
