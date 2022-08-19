@@ -10,8 +10,14 @@ def is_images_equal(img1, img2):
     if result is None:
         return True
     return False
-def check_text_equality(text1,text2):
+def is_text_equal(text1, text2):
     if text1 == text2:
         return True
     else:
+        return False
+def check_text_equal(text1, text2):
+    if not(is_text_equal(text1, text2)):
         raise TextIsDifferent('The text on the page is different than expected')
+def check_text_not_equal(text1, text2):
+    if is_text_equal(text1, text2):
+        raise TextIsDifferent('The text on the page is as expected')
