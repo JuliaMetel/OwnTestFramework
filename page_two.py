@@ -16,11 +16,11 @@ class PageTwo(FoundationPage):
     def element_head_1(self):
         return FoundationElement((By.ID, 'head_1'), self._driver)
 
-    def wait_canvas_stable(self):
+    def is_canvas_equal(self, link):
         canvas_rect = self.element_canvas().get_rect()
         for x in range(5):
             image_1 = self.create_screenshot_by_coordinates(canvas_rect)
-            if is_images_equal(image_1, Image.open("Test_screenshots/test_decals_head_1_male.png")):
+            if is_images_equal(image_1, Image.open(link)):
                 return True
             time.sleep(0.01)
         else:

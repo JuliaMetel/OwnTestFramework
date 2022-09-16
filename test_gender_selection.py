@@ -38,7 +38,7 @@ class TestClass:
         page_two.wait_page_stable()
         page_two.element_eye().click_element()
         page_two.element_head_1().click_element()
-        assert page_two.wait_canvas_stable(), "Screenshots don't match "
+        assert page_two.is_canvas_equal("Test_screenshots/test_decals_head_1_male.png"), "Screenshots don't match "
 
 
 
