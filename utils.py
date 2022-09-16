@@ -1,11 +1,10 @@
-import io
-from PIL import Image, ImageChops
+from PIL import ImageChops
 from exception import TextIsDifferent
 
 
 def is_images_equal(img1, img2):
-    image_1 = Image.open(io.BytesIO(img1)).convert('RGB')
-    image_2 = Image.open(io.BytesIO(img2)).convert('RGB')
+    image_1 = img1.convert('RGB')
+    image_2 = img2.convert('RGB')
     result = ImageChops.difference(image_1, image_2).getbbox()
     if result is None:
         return True
