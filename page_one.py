@@ -8,10 +8,6 @@ class PageOne(FoundationPage):
     welcome_text = 'Welcome to Collectibles Painter'
     select_text = 'Select a model to begin'
 
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.genus = None
-
     def element_doll_base_female(self):
         return FoundationElement((By.ID, 'dollbaseFemale'), self._driver)
 
