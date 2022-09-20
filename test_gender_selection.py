@@ -35,7 +35,7 @@ class TestClass:
     def test_decals_head_1(self, driver, sex):
         page_one = PageOne(driver)
         page_one.open_page()
-        page_one.__getattr__(sex).click_element()
+        getattr(page_one, sex)().click_element()
         page_two = PageTwo(driver)
         page_two.wait_page_stable()
         page_two.element_eye().click_element()
