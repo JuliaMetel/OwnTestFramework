@@ -1,3 +1,4 @@
+import pytest
 from page_one import PageOne
 from page_two import PageTwo
 from utils import check_text_equal
@@ -30,15 +31,17 @@ class TestClass:
         page_one.open_page()
         check_text_equal(page_one.element_loading_menu_select().get_text(), page_one.select_text)
 
-    def test_decals_head_1_male(self, driver):
+    @pytest.mark.parametrize("sex", ['element_doll_base_male', 'element_doll_base_female'])
+    def test_decals_head_1(self, driver, sex):
         page_one = PageOne(driver)
         page_one.open_page()
-        page_one.element_doll_base_male().click_element()
+        getattr(page_one, sex)().click_element()
         page_two = PageTwo(driver)
         page_two.wait_page_stable()
         page_two.element_eye().click_element()
         page_two.element_head_1().click_element()
-        assert page_two.is_canvas_equal("Test_screenshots/test_decals_head_1_male.png"), "Screenshots don't match "
+        assert page_two.is_canvas_equal("Test_screenshots/test_decals_head_1_" + sex + ".png"),\
+            "Screenshots don't match"
 
 
 
